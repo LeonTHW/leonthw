@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gallery</title>
+	<link rel="stylesheet" type="text/css" href="leongallery.css">
+</head>
+<body>
+<h1>Interactive Image Gallery</h1>
+<div>
+	<!-- Gallery -->
+	<ul class="gallery">
+		<li class="gallery-item">
+			<img src="images/space.jpg">
+			<p class="caption">Space</p>
+		</li>
+		<li class="gallery-item">
+			<img src="images/eclipse.jpg">
+			<p class="caption">Eclipse</p>
+		</li>
+		<li class="gallery-item">
+			<img src="images/moon.jpg">
+			<p class="caption">Moon</p>
+		</li>
+		<li class="gallery-item">
+			<img src="images/sunrise.jpg">
+			<p class="caption">Sunrise</p>
+		</li>
+		<li class="gallery-item">
+			<img src="images/universe2.jpg">
+			<p class="caption">Vast</p>
+		</li>
+	</ul>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox hidden">
+	<div class="lightbox-content">
+		<div class="lightbox-controls">
+		<a href="" class="lightbox-close">Close</a>
+		<a href="" class="lightbox-prev">Prev</a>
+		<a href="" class="lightbox-next">Next</a>
+	</div>
+	<div class="lightbox-image">
+		<img src="images/space.jpg">
+		<p class="caption">photo1</p>
+	</div>
+	
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	const closeButton = document.querySelector('.lightbox-close');
+	const lightBox = document.querySelector('.lightbox');
+    const galleryItem = document.querySelectorAll('.gallery-item')
+    const lightboxImage = document.querySelector('.lightbox-image');
+
+    function showImage(event){
+			//show lightbox image
+			lightBox.classList.remove('hidden');
+
+			//get current gallery item
+			const elementClickedOn = event.target;
+			const galleryItemParent = elementClickedOn.parentElement;
+			//replace contents of lightbox-image with current image and caption
+			
+			lightboxImage.innerHTML = galleryItemParent.innerHTML;
+		}
+
+	function hideImage(event){
+		event.preventDefault();
+		lightBox.classList.add('hidden');
+	}
+	//hide lightbox when close button clicked
+	closeButton.onclick = hideImage;
+
+
+	for(let i = 0; i < galleryItem.length; i++){
+		let item = galleryItem[i];
+	//for every gallery item, set onclick handler to show image
+    item.onclick = showImage;
+		
+	}
+
+
+</script>
+
+</body>
+</html>
